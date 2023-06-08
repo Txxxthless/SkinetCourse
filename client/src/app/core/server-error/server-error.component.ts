@@ -1,0 +1,16 @@
+import { Component } from '@angular/core';
+import { Route, Router } from '@angular/router';
+
+@Component({
+  selector: 'app-server-error',
+  templateUrl: './server-error.component.html',
+  styleUrls: ['./server-error.component.scss']
+})
+export class ServerErrorComponent {
+  error: any;
+
+  constructor(private router: Router) {
+    const naviation = this.router.getCurrentNavigation();
+    this.error = naviation?.extras?.state?.['error'];
+  }
+}

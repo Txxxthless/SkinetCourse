@@ -52,6 +52,11 @@ namespace API.Controller
             var specification = new ProductsWithTypesAndBrandsSpecifiaction(id);
             var product = await _productsRepository.GetEntityWithSpecification(specification);
 
+            if (product == null)
+            {
+                return NotFound();
+            }
+
             return Ok(_mapper.Map<Product, ProductToReturnDTO>(product));
         }
 
