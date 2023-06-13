@@ -10,8 +10,10 @@ import { Product } from '../shared/models/product';
 })
 export class BasketService {
   baseUrl = environment.apiUrl;
+
   private basketSource = new BehaviorSubject<Basket | null>(null);
   basketSource$ = this.basketSource.asObservable();
+  
   private basketTotalSource = new BehaviorSubject<BasketTotals | null>(null);
   basketTotalSource$ = this.basketTotalSource.asObservable();
 
