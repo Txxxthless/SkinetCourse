@@ -1,0 +1,21 @@
+<div class="form-floating mb-3">
+  <input
+    [formControl]="control"
+    type="{{ type }}"
+    class="form-control"
+    id="floatingInput{{ label }}"
+    placeholder="{{ label }}"
+    autocomplete="off"
+    [ngClass]="
+      control.touched ? (control.invalid ? 'is-invalid' : 'is-valid') : null
+    "
+  />
+  <div
+    class="fa fa-spinner fa-spin loader"
+    *ngIf="control.status === 'PENDING'"
+  ></div>
+  <label for="floatingInput{{ label }}">{{ label }}</label>
+  <div *ngIf="control.errors?.['emailExists']" class="invalid-feedback">
+    Email is taken
+  </div>
+</div>

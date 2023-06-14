@@ -8,6 +8,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,13 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ServerErrorComponent,
     SectionHeaderComponent,
   ],
-  imports: [CommonModule, RouterModule, BreadcrumbModule, NgxSpinnerModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    BreadcrumbModule,
+    NgxSpinnerModule,
+    BsDropdownModule,
+  ],
   exports: [NavBarComponent, SectionHeaderComponent, NgxSpinnerModule],
 })
 export class CoreModule {}
