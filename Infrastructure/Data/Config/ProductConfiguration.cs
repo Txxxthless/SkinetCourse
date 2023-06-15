@@ -16,10 +16,12 @@ namespace Infrastructure.Data.Config
                 .HasOne(product => product.ProductBrand)
                 .WithMany()
                 .HasForeignKey(product => product.ProductBrandId);
+            builder.Property(product => product.ProductBrandId).ValueGeneratedNever();
             builder
                 .HasOne(product => product.ProductType)
                 .WithMany()
                 .HasForeignKey(product => product.ProductTypeId);
+            builder.Property(product => product.ProductTypeId).ValueGeneratedNever();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Infrastructure.Data
             _context = context;
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int? id)
         {
             return await _context.Set<T>().FirstOrDefaultAsync(product => product.Id == id);
         }
@@ -46,6 +46,22 @@ namespace Infrastructure.Data
                 _context.Set<T>().AsQueryable(),
                 specification
             );
+        }
+
+        public void Add(T entity)
+        {
+            _context.Set<T>().Add(entity);
+        }
+
+        public void Update(T entity)
+        {
+            _context.Set<T>().Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void Deltet(T entity)
+        {
+            _context.Set<T>().Remove(entity);
         }
     }
 }
