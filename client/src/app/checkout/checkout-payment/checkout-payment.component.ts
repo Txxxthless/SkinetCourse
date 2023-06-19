@@ -32,6 +32,8 @@ export class CheckoutPaymentComponent {
       return;
     }
 
+    console.log(orderToCreate);
+
     this.checkoutService.createOrder(orderToCreate).subscribe({
       next: (order) => {
         this.basketService.deleteLocalBasket();

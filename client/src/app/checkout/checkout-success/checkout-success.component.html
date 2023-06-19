@@ -2,5 +2,14 @@
   <div><i class="fa fa-check-circle fa-5x"></i></div>
   <h2>Thank you. Order is confirmed</h2>
   <p class="mb-4">Your order blah-blah-blah</p>
-  <button class="btn btn-outline-success">View your order</button>
+  <button
+    class="btn btn-outline-success"
+    *ngIf="order"
+    routerLink="/orders/{{ order.id }}"
+  >
+    View your order
+  </button>
+  <button class="btn btn-outline-success" *ngIf="!order" routerLink="/orders">
+    View your orders
+  </button>
 </div>
