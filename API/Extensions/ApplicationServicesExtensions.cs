@@ -26,6 +26,7 @@ namespace API.Extensions
                 );
                 return ConnectionMultiplexer.Connect(options);
             });
+            services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ITokenService, TokenService>();

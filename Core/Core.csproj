@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.31.0" />
     <PackageReference Include="StackExchange.Redis" Version="2.6.111" />
+    <PackageReference Include="Stripe.net" Version="41.20.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
   </ItemGroup>
 
