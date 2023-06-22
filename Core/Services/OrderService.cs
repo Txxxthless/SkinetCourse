@@ -40,8 +40,30 @@ namespace Core.Services
                 .Repository<DeliveryMethod>()
                 .GetByIdAsync(deliveryMethodId);
             var subtotal = items.Sum(item => item.Price * item.Quantity);
-            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal);
 
+            var specification = new OrderByPaymentIntentId(basket.PaymentIntentId);
+            var order = await _unitOfWork
+                .Repository<Order>()
+                .GetEntityWithSpecification(specification);
+
+            if (order != null)
+            {
+                order.ShipToAdress = shippingAddress;
+                order.DeliveryMethod = deliveryMethod;
+                order.Subtotal = subtotal;
+                _unitOfWork.Repository<Order>().Update(order);
+            }
+            else
+            {
+                order = new Order(
+                    items,
+                    buyerEmail,
+                    shippingAddress,
+                    deliveryMethod,
+                    subtotal,
+                    basket.PaymentIntentId
+                );
+            }
             _unitOfWork.Repository<Order>().Add(order);
             var result = await _unitOfWork.Complete();
 
@@ -50,7 +72,7 @@ namespace Core.Services
                 return null;
             }
 
-            await _basketRepository.DeleteBasketAsync(basketId);
+            
 
             return order;
         }

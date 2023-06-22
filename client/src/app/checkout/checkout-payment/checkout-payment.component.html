@@ -12,6 +12,7 @@
       <div class="form-floating">
         <div class="form-control" #cardNumber>
           <label>Card Number</label>
+          <span class="text-danger">{{ cardErrors }}</span>
         </div>
       </div>
     </div>
@@ -36,8 +37,13 @@
   <button class="btn btn-outline-primary" cdkStepperPrevious>
     <i class="fa fa-angle-left">Back to review</i>
   </button>
-  <button class="btn btn-primary" (click)="submitOrder()">
+  <button
+    class="btn btn-primary"
+    (click)="submitOrder()"
+    [disabled]="loading || !paymentFormComplete"
+  >
     Submit order
     <i class="fa fa-angle-right"></i>
+    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
   </button>
 </div>
