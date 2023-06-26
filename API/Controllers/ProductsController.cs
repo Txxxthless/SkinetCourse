@@ -29,6 +29,7 @@ namespace API.Controller
             _mapper = mapper;
         }
 
+        [Cached(600)]
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductToReturnDTO>>> GetProducts(
             [FromQuery] ProductSpecParams productParams
@@ -38,14 +39,21 @@ namespace API.Controller
             var countSpecifaction = new ProductWithFiltersForCountSpecification(productParams);
             var totalItems = await _productsRepository.CountAsync(countSpecifaction);
             var products = await _productsRepository.ListAsync(specification);
-            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDTO>>(products);
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDTO>>(
+                products
+            );
 
             return Ok(
-                new Pagination<ProductToReturnDTO>(productParams.PageIndex, productParams.PageSize,
-                totalItems, data)
+                new Pagination<ProductToReturnDTO>(
+                    productParams.PageIndex,
+                    productParams.PageSize,
+                    totalItems,
+                    data
+                )
             );
         }
 
+        [Cached(600)]
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
@@ -60,6 +68,7 @@ namespace API.Controller
             return Ok(_mapper.Map<Product, ProductToReturnDTO>(product));
         }
 
+        [Cached(600)]
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
@@ -67,6 +76,7 @@ namespace API.Controller
             return Ok(productBrands);
         }
 
+        [Cached(600)]
         [HttpGet("types")]
         public async Task<ActionResult<List<ProductType>>> GetProductTypes()
         {
